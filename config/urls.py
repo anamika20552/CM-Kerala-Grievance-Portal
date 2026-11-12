@@ -1,12 +1,22 @@
+
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    # React authentication APIs
     path("api/accounts/", include("accounts.urls")),
 
-    # Main website
+    path("api/grievances/", include("grievances.urls")),
+
     path("", include("dashboards.urls")),
+        path("api/ai/", include("ai_assistant.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )

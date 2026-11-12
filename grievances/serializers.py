@@ -85,3 +85,21 @@ class GrievanceSerializer(serializers.ModelSerializer):
             )
 
         return grievance
+
+class GrievanceHistorySerializer(serializers.ModelSerializer):
+    updated_by_name = serializers.CharField(
+        source="updated_by.username",
+        read_only=True,
+        default="System"
+    )
+
+    class Meta:
+        model = GrievanceHistory
+        fields = [
+            "id",
+            "previous_status",
+            "new_status",
+            "remarks",
+            "updated_by_name",
+            "timestamp"
+        ]

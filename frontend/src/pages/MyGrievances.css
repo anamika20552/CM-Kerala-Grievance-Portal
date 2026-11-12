@@ -1,0 +1,45 @@
+
+.my-grievances-page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: #f4f7fb;
+}
+
+.my-grievances-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.my-grievances-container h2 {
+  color: #173b70;
+  margin-bottom: 10px;
+}
+
+.back-link {
+  display: inline-block;
+  margin: 15px 0 25px;
+  color: #1765b1;
+  text-decoration: none;
+}
+
+.grievance-card {
+  background: white;
+  padding: 22px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+}
+
+.grievance-card h3 {
+  color: #173b70;
+  margin-bottom: 15px;
+}
+
+.grievance-card p {
+  margin: 8px 0;
+  color: #444;
+}
+
+.error-message {
+  color: #c62828;
+}

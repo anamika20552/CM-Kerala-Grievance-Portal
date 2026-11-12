@@ -37,18 +37,27 @@ function Login() {
       sessionStorage.setItem("refresh_token", response.data.refresh);
 
       const userResponse = await api.get("accounts/me/");
+      const user = userResponse.data;
 
-      sessionStorage.setItem(
-        "user",
-        JSON.stringify(userResponse.data)
-      );
+      sessionStorage.setItem("user", JSON.stringify(user));
 
-      if (userResponse.data.role === "citizen") {
+      // Redirect based on user role
+      if (user.role === "citizen") {
         navigate("/citizen-dashboard");
+      } else if (user.role === "cmo") {
+        navigate("/cmo-dashboard");
+      } else if (user.role === "officer") {
+        navigate("/officer-dashboard");
       } else {
-        setError("This login page is currently for citizens.");
+        setError("Your account does not have a valid role.");
+        sessionStorage.clear();
       }
+
     } catch (err) {
+      sessionStorage.removeItem("access_token");
+      sessionStorage.removeItem("refresh_token");
+      sessionStorage.removeItem("user");
+
       if (err.response?.status === 401) {
         setError("Invalid email or password.");
       } else {
@@ -64,8 +73,8 @@ function Login() {
   return (
     <div className="auth-container">
       <form className="auth-card" onSubmit={handleSubmit}>
-        <h2>Citizen Login</h2>
-        <p>Login to manage and track your grievances.</p>
+        <h2>Portal Login</h2>
+        <p>Login to access your grievance portal dashboard.</p>
 
         <label>Email Address</label>
         <input
@@ -94,7 +103,7 @@ function Login() {
         </button>
 
         <p>
-          Don't have an account? <Link to="/register">Register</Link>
+          Citizen account? <Link to="/register">Register here</Link>
         </p>
       </form>
     </div>

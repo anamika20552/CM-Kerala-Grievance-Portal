@@ -1,6 +1,12 @@
+
 from django.urls import path
-from . import views
+from .views import home, CMODashboardStatsView
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path("", home, name="home"),
+    path(
+        "api/cmo/stats/",
+        CMODashboardStatsView.as_view(),
+        name="cmo-dashboard-stats"
+    ),
 ]
