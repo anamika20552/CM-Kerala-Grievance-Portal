@@ -165,23 +165,16 @@ class GrievanceHistory(models.Model):
         return f"{self.grievance.reference_id} - {self.new_status}"
 
 class Attachment(models.Model):
-
     grievance = models.ForeignKey(
         Grievance,
         on_delete=models.CASCADE,
-        related_name='attachments'
+        related_name="attachments"
     )
-
-    file = models.FileField(
-        upload_to='grievance_attachments/'
-    )
-
+    file = models.FileField(upload_to="grievance_attachments/")
     uploaded_by = models.ForeignKey(
         User,
-        on_delete=models.SET_NULL,
-        null=True
+        on_delete=models.CASCADE
     )
-
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
